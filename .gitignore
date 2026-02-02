@@ -1,0 +1,11 @@
+# Entorno virtual
+venv/
+__pycache__/
+*.pyc
+
+# Variables sensibles
+.env
+
+# Datos temporales
+data/*.json
+data/*.csv
