@@ -8,15 +8,13 @@ from scripts.transform import transform_data
 from scripts.load import load_to_sql
 from datetime import datetime
 
-# Configuración de la DB
-DB_HOST = os.getenv("DB_HOST", "db")
-DB_NAME = os.getenv("DB_NAME", "river_plate_db")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASS = os.getenv("DB_PASSWORD", "admin123")
-DB_PORT = os.getenv("DB_PORT", "5432")
+from config import get_db_url
+
+# --- Configuración de la DB ---
+# La configuración se carga centralizadamente desde config.py
 
 def get_engine():
-    return create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+    return create_engine(get_db_url())
 
 st.set_page_config(page_title="River Plate Analytics", page_icon="⚪🔴", layout="wide")
 

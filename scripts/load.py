@@ -1,22 +1,12 @@
 import pandas as pd
 from sqlalchemy import create_engine
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-# Configuración de conexión desde el .env
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
+from config import get_db_url
 
 def load_to_sql():
     print("Cargando datos a PostgreSQL...")
     
-    # Crear conexión
-    engine = create_engine(f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
+    # Crear conexión usando la URL centralizada
+    engine = create_engine(get_db_url())
     
     # Leer el CSV limpio
     df = pd.read_csv('data/river_cleaned.csv')
